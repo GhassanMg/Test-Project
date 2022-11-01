@@ -65,9 +65,19 @@ class ProductController extends Controller
         }
     }
 
-    public function get_user_products(GetUserProductsRequest $request){
+    public function get_user_products_by_admin(GetUserProductsRequest $request){
         try{
             $products = Product::where('user_id',$request->user_id)->paginate(10);
+
+            return $this->sendResponse('', $products);
+        }catch (Exception $e){
+            return $this->sendError($e->getMessage(), 500);
+        }
+    }
+
+    public function get_user_products_by_user(Request $request){
+        try{
+            $products = Product::where('user_id',$request->user()->id)->paginate(10);
 
             return $this->sendResponse('', $products);
         }catch (Exception $e){
