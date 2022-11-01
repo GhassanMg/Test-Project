@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Api\User;
+namespace App\Http\Requests\Api\Product;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class UpdatePasswordRequest extends FormRequest
+class AssignProductsRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,7 +26,8 @@ class UpdatePasswordRequest extends FormRequest
     public function rules()
     {
         return [
-            'password' => 'required|string|min:8|confirmed',
+            'product_id' => 'required|integer|exists:products,id',
+            'user_id'    => 'required|integer|exists:users,id',
         ];
     }
 

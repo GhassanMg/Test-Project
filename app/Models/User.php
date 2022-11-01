@@ -24,6 +24,7 @@ class User extends Authenticatable
         'email',
         'phone_number',
         'password',
+        'image',
     ];
 
     /**
@@ -51,9 +52,22 @@ class User extends Authenticatable
         $this->attributes['password'] = Hash::make($value);
     }
 
+    public function getImageAttribute($key)
+    {
+        if (is_null($key)) {
+            return null;
+        }
+        return url('/').$key;
+    }
+
     //Relations
     public function role()
     {
         return $this->belongsTo(Role::class);
+    }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
     }
 }
