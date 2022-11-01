@@ -14,13 +14,14 @@ class AuthController extends Controller
     public function register(RegisterRequest $request)
     {
         try{
-            User::create([
+            $user = User::create([
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
                 'email'     => $request->email,
                 'phone_number' => $request->phone_number,
                 'password' => $request->password,
             ]);
+            $user->assignRole('user');
             return $this->sendResponse('register success', []);
         }
         catch(Exception $e){
@@ -51,13 +52,13 @@ class AuthController extends Controller
         }
     }
 
-    protected function credentials(Request $request)
-    {
-        if(is_numeric($request->get('login'))){
-        return ['phone_number'=>$request->get('login'),'password'=>$request->get('password')];
-        }
-        else{
-        return ['email' => $request->get('login'), 'password'=>$request->get('password')];
-        }
-    }
+    // protected function credentials(Request $request)
+    // {
+    //     if(is_numeric($request->get('login'))){
+    //     return ['phone_number'=>$request->get('login'),'password'=>$request->get('password')];
+    //     }
+    //     else{
+    //     return ['email' => $request->get('login'), 'password'=>$request->get('password')];
+    //     }
+    // }
 }

@@ -15,8 +15,19 @@ class UserController extends Controller
     public function get_current_user_profile()
     {
         try {
-            $user = auth()->user();
+            $user = User::where('id',auth()->user()->id)->with('role')->first();
             return $this->sendResponse('', $user);
+        } catch (Exception $e) {
+            return $this->sendError($e->getMessage(), 500);
+        }
+    }
+
+    public function get_user_roles()
+    {
+        try {
+            $user = User::where('id',auth()->user()->id)->first();
+            $roles = $user->getRoleNames();
+            return $this->sendResponse('', $roles);
         } catch (Exception $e) {
             return $this->sendError($e->getMessage(), 500);
         }
@@ -43,7 +54,7 @@ class UserController extends Controller
         try {
             $user = $request->user();
             $user->update([
-                'password' => $request->get('password')
+                'password' => $request->password
             ]);
             return $this->sendResponse('password updated successfully', $user);
         } catch (Exception $e) {
