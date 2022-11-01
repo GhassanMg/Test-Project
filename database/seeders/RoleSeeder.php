@@ -30,7 +30,6 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'view all products']);
 
         //user permissions
-        Permission::create(['name' => 'show profile']);
         Permission::create(['name' => 'show products']);
 
         //Default Roles
@@ -49,7 +48,6 @@ class RoleSeeder extends Seeder
 
         Role::create(['name' => 'user'])
             ->givePermissionTo([
-                'show profile',
                 'show products'
             ]);
     }
