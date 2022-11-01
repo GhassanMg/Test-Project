@@ -26,8 +26,9 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'nullable|email|exists:users,email|max:255|min:1|regex:/(.+)@(.+)\.(.+)/i',
-            'phone' => 'nullable|string|exists:users,phone|regex:/(^(\+)*(\d+)$)/u|max:255|min:6',
+            // 'email' => 'nullable|email|exists:users,email|max:255|min:1|regex:/(.+)@(.+)\.(.+)/i',
+            // 'phone' => 'nullable|string|exists:users,phone|regex:/(^(\+)*(\d+)$)/u|max:255|min:6',
+            'login' => 'required|string|max:55|min:10',
             'password' => 'required|string|max:255|min:8',
         ];
     }
