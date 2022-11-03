@@ -4,7 +4,6 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use Spatie\Permission\Exceptions\UnauthorizedException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -53,19 +52,17 @@ class Handler extends ExceptionHandler
     public function render($request, Throwable $exception)
     {
         if ($exception instanceof \Spatie\Permission\Exceptions\UnauthorizedException) {
-
-            if ($request->wantsJson()){
+            if ($request->wantsJson()) {
                 throw new HttpResponseException(
                     response()->json([
                         'success' => false,
                         'message' => 'You do not have the required Unauthorization',
                     ], 403));
-            }
-            else
-            {
-                return abort(403,'Unauthorized');
+            } else {
+                return abort(403, 'Unauthorized');
             }
         }
+
         return parent::render($request, $exception);
     }
 }

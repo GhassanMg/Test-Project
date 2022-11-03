@@ -17,7 +17,7 @@ class Product extends Model
     protected $fillable = [
         'name',
         'description',
-        'image'
+        'image',
     ];
 
     //Attributes
@@ -26,6 +26,7 @@ class Product extends Model
         if (is_null($key)) {
             return null;
         }
+
         return url('/').'/'.$key;
         //return url('/').$key;
     }

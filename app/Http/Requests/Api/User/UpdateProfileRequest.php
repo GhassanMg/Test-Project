@@ -27,10 +27,10 @@ class UpdateProfileRequest extends FormRequest
     public function rules()
     {
         return [
-            'first_name'    => 'required|string|max:255|min:3',
-            'last_name'     => 'required|string|max:255|min:3',
-            'email'         => ['required_without:phone_number','email',Rule::unique('users')->ignore($this->user()->id, 'id'),'max:255','min:3','regex:/(.+)@(.+)\.(.+)/i'],
-            'phone_number'  => ['required_without:email','string',Rule::unique('users')->ignore($this->user()->id, 'id'),'regex:/(^(\+)*(\d+)$)/u','max:255','min:6'],
+            'first_name' => 'required|string|max:255|min:3',
+            'last_name' => 'required|string|max:255|min:3',
+            'email' => ['required_without:phone_number', 'email', Rule::unique('users')->ignore($this->user()->id, 'id'), 'max:255', 'min:3', 'regex:/(.+)@(.+)\.(.+)/i'],
+            'phone_number' => ['required_without:email', 'string', Rule::unique('users')->ignore($this->user()->id, 'id'), 'regex:/(^(\+)*(\d+)$)/u', 'max:255', 'min:6'],
         ];
     }
 

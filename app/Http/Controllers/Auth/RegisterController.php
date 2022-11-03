@@ -3,10 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -50,11 +49,11 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'first_name'    => 'required|string|max:255|min:3',
-            'last_name'     => 'required|string|max:255|min:3',
-            'email'         => 'required_without:phone_number|email|unique:users|max:255|min:3|regex:/(.+)@(.+)\.(.+)/i',
-            'phone_number'  => 'required_without:email|string|unique:users|regex:/(^(\+)*(\d+)$)/u|max:255|min:6',
-            'password'      => 'required|string|max:255|min:8',
+            'first_name' => 'required|string|max:255|min:3',
+            'last_name' => 'required|string|max:255|min:3',
+            'email' => 'required_without:phone_number|email|unique:users|max:255|min:3|regex:/(.+)@(.+)\.(.+)/i',
+            'phone_number' => 'required_without:email|string|unique:users|regex:/(^(\+)*(\d+)$)/u|max:255|min:6',
+            'password' => 'required|string|max:255|min:8',
         ]);
     }
 
@@ -69,11 +68,12 @@ class RegisterController extends Controller
         $user = User::create([
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
-            'email'     => $data['email'],
+            'email' => $data['email'],
             'phone_number' => $data['phone_number'],
             'password' => $data['password'],
         ]);
         $user->assignRole('user');
+
         return $user;
     }
 }

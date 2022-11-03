@@ -26,9 +26,9 @@ class AddProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'        => 'required|string|max:255|min:5',
+            'name' => 'required|string|max:255|min:5',
             'description' => 'required|string|max:255|min:5',
-            'image'       => 'required|image',
+            'image' => 'required|image',
         ];
     }
 

@@ -3,7 +3,6 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\UserController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,10 +20,8 @@ Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 
 Route::middleware('auth:api')->group(function () {
-
     //Group Of Admin Api's
     Route::group(['middleware' => ['role:admin']], function () {
-
         //Profile
         Route::get('profile', [UserController::class, 'get_current_user_profile']);
 
@@ -47,4 +44,3 @@ Route::middleware('auth:api')->group(function () {
     //Current User Products Admin & User
     Route::get('user/products', [ProductController::class, 'get_user_products_by_user']);
 });
-

@@ -2,10 +2,9 @@
 
 namespace Database\Seeders;
 
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class RoleSeeder extends Seeder
 {
@@ -43,12 +42,12 @@ class RoleSeeder extends Seeder
                 'view user products',
                 'edit product',
                 'delete product',
-                'view all products'
+                'view all products',
             ]);
 
         Role::create(['name' => 'user'])
             ->givePermissionTo([
-                'show products'
+                'show products',
             ]);
     }
 }

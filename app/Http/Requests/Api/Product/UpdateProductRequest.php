@@ -26,10 +26,10 @@ class UpdateProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'product_id'  => 'required|integer|exists:products,id',
-            'name'        => 'required|string|max:255|min:5',
+            'product_id' => 'required|integer|exists:products,id',
+            'name' => 'required|string|max:255|min:5',
             'description' => 'required|string|max:255|min:5',
-            'image'       => 'nullable|image'
+            'image' => 'nullable|image',
         ];
     }
 

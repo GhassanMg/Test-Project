@@ -3,16 +3,10 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Product\AddProductRequest as ProductAddProductRequest;
-use App\Http\Requests\Api\Product\GetUserProductsRequest;
-use App\Http\Requests\Dashboard\Product\GetProductRequest;
 use App\Http\Requests\Dashboard\Product\StoreProductRequest;
 use App\Http\Requests\Dashboard\Product\UpdateDashboardProductRequest;
-use App\Http\Requests\Product\AddProductRequest;
-use App\Models\Area;
 use App\Models\Product;
 use App\Services\ImageService;
-use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -47,9 +41,9 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request)
     {
         $product = Product::create([
-            'name' =>  $request->name,
+            'name' => $request->name,
             'description' => $request->description,
-            'image' => ImageService::storeFiles($request->file('image'),'Products/Images')
+            'image' => ImageService::storeFiles($request->file('image'), 'Products/Images'),
         ]);
 
         return redirect()->route('products.index');
@@ -92,12 +86,13 @@ class ProductController extends Controller
         ]);
 
         if (isset($request->image)) {
-            $new_image = ImageService::storeFiles($request  ->file('image'),'Products/Images');
+            $new_image = ImageService::storeFiles($request->file('image'), 'Products/Images');
             $product->update([
                 'image' => $new_image,
             ]);
         }
         $products = Product::paginate(10);
+
         return redirect()->route('products.index');
     }
 

@@ -27,7 +27,7 @@ class AssignProductsRequest extends FormRequest
     {
         return [
             'product_id' => 'required|integer|exists:products,id',
-            'user_id'    => 'required|integer|exists:users,id',
+            'user_id' => 'required|integer|exists:users,id',
         ];
     }
 

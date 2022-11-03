@@ -32,6 +32,7 @@ class LoginRequest extends FormRequest
             'password' => 'required|string|max:255|min:8',
         ];
     }
+
     protected function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(

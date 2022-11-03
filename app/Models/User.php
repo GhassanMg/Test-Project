@@ -57,6 +57,7 @@ class User extends Authenticatable
         if (is_null($key)) {
             return null;
         }
+
         return url('/').$key;
     }
 
