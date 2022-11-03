@@ -19,13 +19,12 @@ class ImageService
 
         $folderName = str_replace(' ', '-', $folderName)/*Str::slug($folderName, '-')*/;
 
-        $folderName = $folderName.'/'.date('Y-m-d');
-        $mediaName = $mediaName.'-'.Carbon::now()->microsecond;
-        $mediaName = Str::slug($mediaName, '-').'.'.$media->extension();
+        $folderName = $folderName . '/' . date('Y-m-d');
+        $mediaName = $mediaName . '-' . Carbon::now()->microsecond;
+        $mediaName = Str::slug($mediaName, '-') . '.' . $media->getClientOriginalExtension();
         $media->storeAs($folderName, $mediaName);
-        $path = 'storage/'.$folderName;
-        $image = $path.'/'.$mediaName;
-
+        $path = 'storage/' . $folderName;
+        $image = $path . '/' . $mediaName;
         return $image;
     }
 }

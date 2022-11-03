@@ -23,7 +23,7 @@ class ProductController extends Controller
             $product = Product::create([
                 'name' => $request->name,
                 'description' => $request->description,
-                'image' => ImageService::storeFiles($request->file('image'),'ProductsImages')
+                'image' => ImageService::storeFiles($request->file('image'),'Products/Images')
             ]);
             return $this->sendResponse('product added successfully', []);
         } catch (Exception $e) {
@@ -42,7 +42,7 @@ class ProductController extends Controller
             ]);
 
             if (isset($request->image)) {
-                $new_image = ImageService::storeFiles($request->file('image'),'ProductsImages');
+                $new_image = ImageService::storeFiles($request->file('image'),'Products/Images');
                 $product->update([
                     'image' => $new_image,
                 ]);
@@ -57,7 +57,7 @@ class ProductController extends Controller
 
     public function get_all_products(){
         try{
-            $products = Product::all()->paginate(10);
+            $products = Product::paginate(10);
 
             return $this->sendResponse('', $products);
         }catch (Exception $e){

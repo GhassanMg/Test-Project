@@ -14,7 +14,7 @@ class UserController extends Controller
     public function get_current_user_profile()
     {
         try {
-            $user = User::where('id',auth()->user()->id)->with('role')->first();
+            $user = User::where('id',auth()->user()->id)->first();
             return $this->sendResponse('', $user);
         } catch (Exception $e) {
             return $this->sendError($e->getMessage(), 500);

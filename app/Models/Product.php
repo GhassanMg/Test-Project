@@ -26,7 +26,8 @@ class Product extends Model
         if (is_null($key)) {
             return null;
         }
-        return url('/').$key;
+        return url('/').'/'.$key;
+        //return url('/').$key;
     }
 
     //Relations

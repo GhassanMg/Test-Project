@@ -61,11 +61,6 @@ class User extends Authenticatable
     }
 
     //Relations
-    public function role()
-    {
-        return $this->belongsTo(Role::class);
-    }
-
     public function products()
     {
         return $this->hasMany(Product::class);

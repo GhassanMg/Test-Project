@@ -51,14 +51,4 @@ class AuthController extends Controller
             return $this->sendError($e->getMessage(), 500);
         }
     }
-
-    // protected function credentials(Request $request)
-    // {
-    //     if(is_numeric($request->get('login'))){
-    //     return ['phone_number'=>$request->get('login'),'password'=>$request->get('password')];
-    //     }
-    //     else{
-    //     return ['email' => $request->get('login'), 'password'=>$request->get('password')];
-    //     }
-    // }
 }
