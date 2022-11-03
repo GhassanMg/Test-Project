@@ -7,6 +7,8 @@ use App\Http\Requests\Dashboard\Product\StoreProductRequest;
 use App\Http\Requests\Dashboard\Product\UpdateDashboardProductRequest;
 use App\Models\Product;
 use App\Services\ImageService;
+use Exception;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -20,6 +22,14 @@ class ProductController extends Controller
         $products = Product::latest()->paginate(3);
 
         return view('products.index', compact('products'));
+    }
+
+    public function get_user_products_by_user(Request $request)
+    {
+        $products = Product::where('user_id', $request->user()->id)->paginate(10);
+
+        return view('products.index', compact('products'));
+
     }
 
     /**

@@ -44,7 +44,11 @@
                     </li>
 
                     <li class="nav-item ">
+                        @if (auth()->user()->hasRole('admin'))
                         <a class="nav-link" href="{{ route('products.index') }}">
+                            @else
+                            <a class="nav-link" href="{{ route('user_products') }}">
+                                @endif
                             {{-- data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false"> --}}
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
                                 <!-- Download SVG icon from http://tabler-icons.io/i/file-text -->

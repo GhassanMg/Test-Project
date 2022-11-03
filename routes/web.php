@@ -31,9 +31,10 @@ Route::middleware('auth')->group(function () {
         Route::view('about', 'about')->name('about');
 
         Route::get('profile', [UserController::class, 'show'])->name('profile.show');
-        //Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
 
         Route::resource('products', ProductController::class);
         Route::resource('users', UserController::class);
+
     });
+    Route::get('user/products', [ProductController::class, 'get_user_products_by_user'])->name('user_products');
 });
