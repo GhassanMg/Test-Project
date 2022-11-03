@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Dashboard\ProfileController;
 use App\Http\Controllers\Dashboard\UserController;
@@ -25,17 +24,14 @@ Route::get('/', function () {
 
 Auth::routes();
 
-//Route::post('register', [AuthController::class, 'register'])->name('register');
-//Route::post('login', [AuthController::class, 'login'])->name('login');
-
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::middleware('auth')->group(function () {
     Route::group(['middleware' => ['role:admin']], function () {
         Route::view('about', 'about')->name('about');
 
-        Route::get('profile', [ProfileController::class, 'show'])->name('profile.show');
-        Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
+        Route::get('profile', [UserController::class, 'show'])->name('profile.show');
+        //Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
 
         Route::resource('products', ProductController::class);
         Route::resource('users', UserController::class);

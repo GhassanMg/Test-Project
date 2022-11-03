@@ -1,90 +1,33 @@
 @extends('layouts.app')
 
+@section('title' . ' - ' . auth()->user()->name)
+
 @section('content')
-    <div class="container-xl">
-        <!-- Page title -->
-        <div class="page-header d-print-none">
-            <div class="row align-items-center">
-                <div class="col">
-                <!-- Page pre-title -->
-                <div class="page-pretitle">
-                    {{ config('app.name') }}
-                </div>
-                    <h2 class="page-title">
-                        {{ __('My profile') }}
-                    </h2>
+    <section>
+        <div class="container my-4">
+            <div class="card my-3 shadow bg-white rounded">
+                <div class="card-body">
+                    <h1 class="card-title"> {{ auth()->user()->first_name.' '.auth()->user()->last_name    }}</h1>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="page-body">
-        <div class="container-xl">
-
-            @if ($message = Session::get('success'))
-            <div class="alert alert-success alert-dismissible">
-                <div class="d-flex">
-                    <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon alert-icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                            <path d="M5 12l5 5l10 -10"></path>
-                        </svg>
-                    </div>
-                    <div>
-                        {{ $message }}
-                    </div>
-                  </div>
-                <a class="btn-close" data-bs-dismiss="alert" aria-label="close"></a>
-            </div>
-            @endif
-
-            <form action="{{ route('profile.update') }}" method="POST" class="card" autocomplete="off">
-                @csrf
-                @method('PUT')
+            <div class="card mb-3">
 
                 <div class="card-body">
-
-
-                    <div class="mb-3">
-                        <label class="form-label required">{{ __('Name') }}</label>
-                        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" placeholder="{{ __('Name') }}" value="{{ old('name', auth()->user()->name) }}" required>                        
-                    </div>
-                    @error('name')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-
-                    <div class="mb-3">
-                        <label class="form-label required">{{ __('Email address') }}</label>
-                        <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="{{ __('Email') }}" value="{{ old('email', auth()->user()->email) }}" required>
-                    </div>
-                    @error('email')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-
-                    <div class="mb-3">
-                        <label class="form-label required">{{ __('New password') }}</label>
-                        <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="{{ __('New password') }}">
-                    </div>
-                    @error('password')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-
-                    <div class="mb-3">
-                        <label class="form-label required">{{ __('New password confirmation') }}</label>
-                        <input type="password" name="password_confirmation" class="form-control @error('password_confirmation') is-invalid @enderror" placeholder="{{ __('New password confirmation') }}" autocomplete="new-password">
-                    </div>
-                    @error('password_confirmation')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-
+                    <h1 class="card-title text-primary"> User Info </h1>
+                    <p class="card-text">
+                    <h4>First Name :</h4> {{ auth()->user()->first_name }} <br>
+                    <h4>Last Name :</h4> {{ auth()->user()->last_name }} <br>
+                    <h4>Email Address :</h4> {{ auth()->user()->email }} <br>
+                    <h4>Phone Number :</h4> {{ auth()->user()->phone_number }} <br>
+                    </p>
                 </div>
-
-                <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
-                </div>
-
-            </form>
-
+            </div>
         </div>
-    </div>
-
+    </section>
 @endsection
+<style scoped>
+    h4 {
+        display: inline;
+    }
+
+</style>
